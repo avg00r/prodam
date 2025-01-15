@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Редактирование товара{% endblock %}
+
+{% block content %}
+    <h1>Редактировать товар</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <div class="form-group">
+            <label>Название:</label>
+            <input type="text" name="name" value="{{ product.name }}" required>
+        </div>
+        <div class="form-group">
+            <label>Описание:</label>
+            <textarea name="description" rows="4">{{ product.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label>Цена:</label>
+            <input type="number" name="price" step="0.01" value="{{ product.price }}" required>
+        </div>
+        <div class="button-group">
+            <button type="submit">Сохранить изменения</button>
+            <a href="{{ url_for('my_products') }}" class="cancel-btn">Отмена</a>
+        </div>
+    </form>
+{% endblock %} 

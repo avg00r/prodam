@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ПроДам - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <a href="{{ url_for('index') }}" class="site-logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ПроДам">
+                    Про<span class="highlight">Дам</span>
+                </a>
+                <div class="nav-links">
+                    <a href="{{ url_for('index') }}">Главная</a>
+                </div>
+            </div>
+            <div class="navbar-right">
+                {% if current_user %}
+                    <div class="navbar-links">
+                        <a href="{{ url_for('profile') }}">Профиль</a>
+                        <a href="{{ url_for('my_products') }}">Мои товары</a>
+                        <a href="{{ url_for('create_product') }}" class="create-btn">Создать товар</a>
+                        <a href="{{ url_for('logout') }}" class="logout-btn">Выйти</a>
+                        <span class="username">{{ current_user.username }}</span>
+                    </div>
+                {% else %}
+                    <div class="navbar-links">
+                        <a href="{{ url_for('login') }}">Войти</a>
+                        <a href="{{ url_for('register') }}">Регистрация</a>
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+        
+        <div class="search-container">
+            <form action="{{ url_for('index') }}" method="GET" class="search-form">
+                <input type="text" 
+                       name="search" 
+                       placeholder="Поиск товаров..." 
+                       value="{{ search_query if search_query else '' }}"
+                       class="search-input">
+                <button type="submit" class="search-button">Найти</button>
+            </form>
+        </div>
+
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html> 

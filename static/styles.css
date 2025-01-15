@@ -1,0 +1,370 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.alert {
+    padding: 10px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.logout-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.create-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.site-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-logo img {
+    height: 40px; /* Настройте размер под ваш логотип */
+    width: auto;
+}
+
+.site-logo span.highlight {
+    color: #45a049;
+}
+
+.navbar-left {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.navbar-left .nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    height: 100%;
+}
+
+.username {
+    padding: 8px 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    color: #333;
+    font-weight: bold;
+    height: 24px;
+    line-height: 24px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 4px;
+    max-width: 300px;
+}
+
+.product-card h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.product-card .description {
+    color: #666;
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.product-card .price {
+    font-size: 1.2em;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.product-card .seller {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.product-card .date {
+    color: #999;
+    font-size: 0.8em;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+
+
+.back-btn {
+    background-color: #666;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.buttons {
+    margin-top: 20px;
+}
+
+.buttons a {
+    margin-right: 10px;
+}
+
+.navbar-links a {
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+}
+
+.create-btn, .logout-btn {
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.create-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.logout-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.create-btn:hover {
+    background-color: #45a049;
+}
+
+.logout-btn:hover {
+    background-color: #da190b;
+}
+
+.navbar-left a {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    line-height: 24px;
+}
+
+.navbar-left a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Общие стили для всех ссылок в навигации */
+.navbar a {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    color: #333;
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    line-height: 24px;
+}
+
+.navbar a:hover {
+    background-color: #f5f5f5;
+}
+
+/* Специальные стили для кнопок, которые переопределят общие стили */
+.create-btn {
+    background-color: #4CAF50;
+    color: white !important; /* Добавляем !important для переопределения общего цвета */
+}
+
+.create-btn:hover {
+    background-color: #45a049 !important;
+}
+
+.logout-btn {
+    background-color: #f44336;
+    color: white !important;
+}
+
+.logout-btn:hover {
+    background-color: #da190b !important;
+}
+
+.product-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn {
+    background-color: #2196F3;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.edit-btn:hover {
+    background-color: #1976D2;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cancel-btn {
+    background-color: #757575;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.cancel-btn:hover {
+    background-color: #616161;
+}
+
+.search-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+/* Добавим стили для результатов поиска */
+.search-results-info {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 18px;
+} 

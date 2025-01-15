@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    <h1>Профиль пользователя</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <div class="form-group">
+            <label>Фамилия:</label>
+            <input type="text" name="lastname" value="{{ user.lastname or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Имя:</label>
+            <input type="text" name="firstname" value="{{ user.firstname or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Отчество:</label>
+            <input type="text" name="middlename" value="{{ user.middlename or '' }}">
+        </div>
+        <div class="form-group">
+            <label>Дата рождения:</label>
+            <input type="date" name="birthdate" value="{{ user.birthdate.strftime('%Y-%m-%d') if user.birthdate else '' }}">
+        </div>
+        <button type="submit">Сохранить</button>
+    </form>
+{% endblock %} 

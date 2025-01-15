@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <h1>{% if search_query %}Результаты поиска{% else %}Все товары{% endif %}</h1>
+    
+    {% if search_query %}
+        <div class="search-results-info">
+            {% if products|length > 0 %}
+                Найдено товаров: {{ products|length }} по запросу "{{ search_query }}"
+            {% else %}
+                По запросу "{{ search_query }}" ничего не найдено
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if 'user_id' in session %}
+        <a href="{{ url_for('create_product') }}" class="create-btn main-create-btn">+ Создать новый товар</a>
+    {% endif %}
+    
+    <div class="products-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <h2>{{ product.name }}</h2>
+                <p class="description">{{ product.description }}</p>
+                <p class="price">{{ "%.2f"|format(product.price) }} ₽</p>
+                <p class="date">Добавлено: {{ product.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+                <p class="seller">Продавец: {{ product.user.username }}</p>
+            </div>
+        {% else %}
+            <div class="no-results">
+                {% if search_query %}
+                    Попробуйте изменить поисковый запрос
+                {% else %}
+                    Пока нет товаров
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %} 

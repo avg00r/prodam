@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Мои товары{% endblock %}
+
+{% block content %}
+    <h1>Мои товары</h1>
+    <div class="products-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <h2>{{ product.name }}</h2>
+                <p class="description">{{ product.description }}</p>
+                <p class="price">{{ "%.2f"|format(product.price) }} ₽</p>
+                <p class="date">Добавлено: {{ product.created_at.strftime('%d.%m.%Y %H:%M') }}</p>
+                <div class="product-actions">
+                    <a href="{{ url_for('edit_product', product_id=product.id) }}" class="edit-btn">Редактировать</a>
+                </div>
+            </div>
+        {% else %}
+            <p>У вас пока нет товаров</p>
+        {% endfor %}
+    </div>
+{% endblock %} 
