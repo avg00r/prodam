@@ -24,13 +24,23 @@
 
 1. Клонируйте репозиторий:
 ```bash
-git clone <url-репозитория>
+git clone https://github.com/avg00r/prodam.git
 ```
 2. Создайте и активируйте виртуальное окружение:
-bash
+```bash
 python -m venv venv
+```
+```bash
 source venv/bin/activate # для Linux/Mac
-venv\Scripts\activate # для Windows
+```
+```powershell
+# In cmd.exe
+venv\Scripts\activate.bat
+```
+```powershell
+# In PowerShell
+venv\Scripts\Activate.ps1
+```
 3. Установите зависимости:
 ```bash
 pip install -r requirements.txt
