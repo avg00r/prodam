@@ -54,6 +54,7 @@ python app.py
 - В локальной сети: http://<IP-адрес>:5000
 
 ## Структура проекта
+```bash
 README.md
 project/
 ├── app.py # Основной файл приложения
@@ -72,6 +73,7 @@ project/
 │ ├── create_product.html # Создание товара
 │ └── edit_product.html # Редактирование товара
 └── users.db # База данных SQLite
+```
 
 ## Тестовые данные
 
