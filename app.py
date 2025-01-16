@@ -1,8 +1,15 @@
+"""
+app.py
+
+This module contains the main application for the ПроДам website, 
+which allows users to create, view, edit, and search for product listings.
+"""
+
+import logging
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-import logging
 from sqlalchemy import or_, func
 
 app = Flask(__name__)
@@ -181,7 +188,7 @@ def edit_product(product_id):
 
     # Проверяем, принадлежит ли товар текущему пользователю
     if product.user_id != current_user.id:
-        logger.warning(f'Пользователь {current_user.username} попытался редактировать чужой товар {product_id}')
+        logger.warning(f'{current_user.username} пытался изменить чужой товар {product_id}')
         flash('У вас нет прав на редактирование этого товара')
         return redirect(url_for('my_products'))
 
