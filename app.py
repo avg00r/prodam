@@ -1,8 +1,15 @@
+"""
+app.py
+
+This module contains the main application for the ПроДам website, 
+which allows users to create, view, edit, and search for product listings.
+"""
+
+import logging
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-import logging
 from sqlalchemy import or_, func
 
 app = Flask(__name__)
@@ -40,7 +47,7 @@ class Product(db.Model):
 def index():
     search_query = request.args.get('search', '').strip()
     current_user = User.query.get(session['user_id']) if 'user_id' in session else None
-    
+
     if search_query:
         # Используем простой LIKE с параметрами
         search_pattern = f"%{search_query}%"
@@ -50,48 +57,48 @@ def index():
                 Product.description.ilike(search_pattern)
             )
         ).order_by(Product.created_at.desc()).all()
-        
+
         logger.info(f'Поиск по запросу: "{search_query}". Найдено товаров: {len(products)}')
     else:
         products = Product.query.order_by(Product.created_at.desc()).all()
-    
-    return render_template('index.html', 
-                         products=products, 
-                         current_user=current_user, 
+
+    return render_template('index.html',
+                         products=products,
+                         current_user=current_user,
                          search_query=search_query)
 
 @app.route('/product/create', methods=['GET', 'POST'])
 def create_product():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    
+
     current_user = User.query.get(session['user_id'])
-    
+
     if request.method == 'POST':
         name = request.form['name']
         description = request.form['description']
         price = float(request.form['price'])
-        
+
         product = Product(
             name=name,
             description=description,
             price=price,
             user_id=session['user_id']
         )
-        
+
         db.session.add(product)
         db.session.commit()
         logger.info(f'Пользователь {current_user.username} создал новый товар: {name}')
         flash('Товар успешно создан!')
         return redirect(url_for('index'))
-    
+
     return render_template('create_product.html', current_user=current_user)
 
 @app.route('/my-products')
 def my_products():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    
+
     current_user = User.query.get(session['user_id'])
     user_products = Product.query.filter_by(user_id=session['user_id']).all()
     return render_template('my_products.html', products=user_products, current_user=current_user)
@@ -102,13 +109,13 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        
+
         user = User.query.filter_by(username=username).first()
         if user and check_password_hash(user.password, password):
             session['user_id'] = user.id
             logger.info(f'Пользователь {username} вошел в систему')
             return redirect(url_for('index'))
-        
+
         logger.warning(f'Неудачная попытка входа для пользователя {username}')
         flash('Неверное имя пользователя или пароль')
     return render_template('login.html')
@@ -117,10 +124,10 @@ def login():
 def profile():
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    
+
     user = User.query.get(session['user_id'])
     current_user = user
-    
+
     if request.method == 'POST':
         user.lastname = request.form['lastname']
         user.firstname = request.form['firstname']
@@ -129,7 +136,7 @@ def profile():
             user.birthdate = datetime.strptime(request.form['birthdate'], '%Y-%m-%d')
         db.session.commit()
         flash('Профиль обновлен')
-    
+
     return render_template('profile.html', user=user, current_user=current_user)
 
 @app.route('/logout')
@@ -164,7 +171,7 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
-        
+
         logger.info(f'Зарегистрирован новый пользователь {username}')
         flash('Регистрация успешна! Теперь вы можете войти.')
         return redirect(url_for('login'))
@@ -175,26 +182,26 @@ def register():
 def edit_product(product_id):
     if 'user_id' not in session:
         return redirect(url_for('login'))
-    
+
     current_user = User.query.get(session['user_id'])
     product = Product.query.get_or_404(product_id)
-    
+
     # Проверяем, принадлежит ли товар текущему пользователю
     if product.user_id != current_user.id:
-        logger.warning(f'Пользователь {current_user.username} попытался редактировать чужой товар {product_id}')
+        logger.warning(f'{current_user.username} пытался изменить чужой товар {product_id}')
         flash('У вас нет прав на редактирование этого товара')
         return redirect(url_for('my_products'))
-    
+
     if request.method == 'POST':
         product.name = request.form['name']
         product.description = request.form['description']
         product.price = float(request.form['price'])
-        
+
         db.session.commit()
         logger.info(f'Пользователь {current_user.username} отредактировал товар: {product.name}')
         flash('Товар успешно обновлен!')
         return redirect(url_for('my_products'))
-    
+
     return render_template('edit_product.html', product=product, current_user=current_user)
 
 if __name__ == '__main__':
